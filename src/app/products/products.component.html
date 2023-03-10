@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      {{searchFromGroup.value | json }}
+      <form [formGroup]="searchFromGroup" (ngSubmit)="searchProduct()">
+        <div class="row">
+          <label for="">Search</label>
+          <input type="text" name="keyword" class="form-control" formControlName="keyword">
+          <button class="btn btn-primary btn-sm">search</button>
+        </div>
+      </form>
+      <table class="table table-hover">
+        <thead>
+
+          <ng-template #errors > 
+            <p>{{errorMessage}}</p>
+          </ng-template>
+      
+          <tr>
+              <th><strong>id</strong></th>
+              <th><strong>name</strong></th>
+              <th><strong>prices</strong></th>
+              <th><strong>promotion</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of products" else errors >
+              <td>{{p.id}}</td>
+              <td>{{p.name}}</td>
+              <td>{{p.price}}</td>
+              <td >
+                  <span *ngIf="p.promotion==true">❤️</span>
+              </td>
+              <td>
+                <span (click)="onPromo(p)" *ngIf="p.promotion==true">off promo</span>
+                <span *ngIf="p.promotion==false">on promo</span>
+              </td>
+              <td><button (click)="deleteProduct(p)" >del</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</div>
