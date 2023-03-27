@@ -11,9 +11,12 @@ export class ProductServiceService {
     this.products=[
       {id:1, name:"computer", price:15245, promotion:true},
       {id:2, name:"tablette", price:1450,promotion:false},
-      {id:3, name:"smart phone", price:5000, promotion:true},
-      {id:3, name:"chargeur type c", price:1250, promotion:true},
-      {id:3, name:"iphone 14 pro max", price:5000,promotion:false}
+      {id:3, name:"smart phone", price:5000, promotion:false},
+      {id:4, name:"chargeur type c", price:1250, promotion:true},
+      {id:5, name:"sac au dos", price:3500, promotion:false},
+      {id:6, name:"souris sans fil", price:1050, promotion:true},
+      {id:7, name:"protege pc", price:9250, promotion:true},
+      {id:8, name:"iphone 14 pro max", price:5000,promotion:false}
     ];
   }
 

@@ -1,21 +1,20 @@
 <div class="container">
   <div class="card">
     <div class="card-body">
-      {{searchFromGroup.value | json }}
-      <form [formGroup]="searchFromGroup" (ngSubmit)="searchProduct()">
-        <div class="row">
-          <label for="">Search</label>
-          <input type="text" name="keyword" class="form-control" formControlName="keyword">
-          <button class="btn btn-primary btn-sm">search</button>
-        </div>
+      <!-- {{searchFromGroup.value | json }} -->
+      <form >
+        <form [formGroup]="searchFromGroup" (ngSubmit)="searchProduct()" class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
       </form>
       <table class="table table-hover">
         <thead>
 
-          <ng-template #errors > 
+          <ng-template #errors >
             <p>{{errorMessage}}</p>
           </ng-template>
-      
+
           <tr>
               <th><strong>id</strong></th>
               <th><strong>name</strong></th>
@@ -32,14 +31,18 @@
                   <span *ngIf="p.promotion==true">❤️</span>
               </td>
               <td>
-                <span (click)="onPromo(p)" *ngIf="p.promotion==true">off promo</span>
-                <span *ngIf="p.promotion==false">on promo</span>
+                <button (click)="onPromo(p)" class="btn btn-sm btn-primary">
+                  <span *ngIf="p.promotion==true">off promo</span>
+                  <span *ngIf="p.promotion==false">on promo</span>
+                </button>
               </td>
-              <td><button (click)="deleteProduct(p)" >del</button></td>
+              <td><button (click)="deleteProduct(p)" class="btn btn-danger">
+                <i class="bi bi-trash"></i>
+              </button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  
+
 </div>
