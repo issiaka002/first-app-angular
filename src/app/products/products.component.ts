@@ -13,13 +13,34 @@ export class ProductsComponent implements OnInit {
     errorMessage !:string;
     searchFromGroup!: FormGroup;
 
+    //..pagination
+    currentPage:number=0;
+    pageSize:number=5;
+    totalPage!:number;
+
+    //..le constructeur sert a injecter les service et autre module supplementaire
     constructor(private productService:ProductServiceService, private fb:FormBuilder ){}
+
     ngOnInit(): void {
+      //..Declaration des differents champs dans le formulaire (data binding)
       this.searchFromGroup = this.fb.group({
         keyword: this.fb.control(null),
       })
 
      this.getAllProducts();
+    }
+
+    //..pagination
+    getPageProducts(){
+      this.productService.getPageAllProduct(this.currentPage, this.pageSize).subscribe({
+        next:(data)=>{
+          this.products=data.product;
+          this.totalPage=data.totalPages;
+        },
+        error:(err)=>{
+          this.errorMessage=err;
+        }
+       })
     }
 
     getAllProducts(){
@@ -57,10 +78,11 @@ export class ProductsComponent implements OnInit {
             this.errorMessage=err;
         }
       })
-      
+
     }
-    
+
     searchProduct(){
+      //..on prend la valeur du champ input
       let keyword = this.searchFromGroup.value.keyword;
       this.productService.findProduct(keyword).subscribe({
         next:(data)=>{
@@ -71,5 +93,5 @@ export class ProductsComponent implements OnInit {
         }
       })
     }
-   
+
 }

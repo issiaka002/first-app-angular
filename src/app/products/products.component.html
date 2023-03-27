@@ -4,7 +4,7 @@
       <!-- {{searchFromGroup.value | json }} -->
       <form >
         <form [formGroup]="searchFromGroup" (ngSubmit)="searchProduct()" class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <input formControlName="keyword" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </form>
@@ -42,6 +42,11 @@
           </tr>
         </tbody>
       </table>
+      <ul class="nav nav-pills">
+        <!-- <li *ngFor="let item of [].constructor(this.totalPage); let i=index" >
+          <a class="btn btn-primary btn-sm">{{i}}</a>
+        </li> -->
+      </ul>
     </div>
   </div>
 

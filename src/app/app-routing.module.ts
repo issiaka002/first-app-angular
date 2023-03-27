@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CostumersComponent } from './costumers/costumers.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { ProductsComponent } from './products/products.component';
 
 
 //..Declaration des routes
 const routes: Routes = [
   {path:"products", component:ProductsComponent},
+  {path:"", component:LoginComponent},
   {path:"costumers", component:CostumersComponent},
   {path:"home", component:HomeComponent}
 ];
