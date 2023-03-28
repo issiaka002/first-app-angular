@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/home" >home</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/products">product</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/admin/costumers">custumer</a></li>
+      <li class="nav-item"><a class="nav-link" href="">service</a></li>
+    </ul>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link">{{authService.authenticatedUser!.username}}</a>
+      </li>
+      <li class="nav-item">
+        <a href="" class="btn nav-link" (click)="handleLogout()">
+          <i class="bi bi-box-arrow-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+</nav>
+
+<router-outlet></router-outlet>

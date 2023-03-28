@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { UUID } from 'angular2-uuid';
-import { AppUser } from '../model/user.model';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,13 @@ import { AppUser } from '../model/user.model';
 export class LoginComponent implements OnInit {
 
   userFormGroup!:FormGroup;
-  users:AppUser[]=[];
+  errorMessage: any;
 
-  constructor(private fb:FormBuilder){
-    this.users.push({userId:UUID.UUID(), username:"user1", password:"1234", roles:["USER"]});
-    this.users.push({userId:UUID.UUID(), username:"user2", password:"1234", roles:["USER"]});
-    this.users.push({userId:UUID.UUID(), username:"admin", password:"1234", roles:["USER", "ADMIN"]})
+  constructor(private fb:FormBuilder, private authService:AuthService, private router:Router){
   };
 
   ngOnInit(): void {
+    //..
     this.userFormGroup=this.fb.group({
       username:this.fb.control(""),
       password: this.fb.control("")
@@ -27,6 +26,20 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin(){
-
+    //..
+    let username=this.userFormGroup.value.username;
+    let password=this.userFormGroup.value.password;
+    this.authService.login(username,password).subscribe({
+      next: (userapp)=>{
+        this.authService.authenticateUser(userapp).subscribe({
+          next: (data)=>{
+            this.router.navigateByUrl("/admin/home");
+          }
+        })
+      },
+      error: (err)=>{
+        this.errorMessage=err;
+      }
+    })
   }
 }
