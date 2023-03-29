@@ -1,5 +1,9 @@
 <div class="container">
+  <nav class="p-2 m-2 border border-info" *ngIf="authService.hasRole('ADMIN')">
+    <button class="btn btn-outline-success" (click)="handleNewProduct()">New Product</button>
+  </nav>
   <div class="card">
+    <div class="card-header">Product list</div>
     <div class="card-body">
       <!-- {{searchFromGroup.value | json }} -->
       <form >
@@ -30,13 +34,13 @@
               <td >
                   <span *ngIf="p.promotion==true">❤️</span>
               </td>
-              <td>
+              <td *ngIf="authService.hasRole('ADMIN')">
                 <button (click)="onPromo(p)" class="btn btn-sm btn-primary">
                   <span *ngIf="p.promotion==true">off promo</span>
                   <span *ngIf="p.promotion==false">on promo</span>
                 </button>
               </td>
-              <td><button (click)="deleteProduct(p)" class="btn btn-danger">
+              <td *ngIf="authService.hasRole('ADMIN')"><button (click)="deleteProduct(p)" class="btn btn-danger">
                 <i class="bi bi-trash"></i>
               </button></td>
           </tr>

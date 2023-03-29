@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Product } from '../model/product';
+import { AuthService } from '../services/auth.service';
 import { ProductServiceService } from '../services/product-service.service';
 
 @Component({
@@ -19,7 +21,7 @@ export class ProductsComponent implements OnInit {
     totalPage!:number;
 
     //..le constructeur sert a injecter les service et autre module supplementaire
-    constructor(private productService:ProductServiceService, private fb:FormBuilder ){}
+    constructor(private productService:ProductServiceService, private fb:FormBuilder, public authService: AuthService, private router:Router ){}
 
     ngOnInit(): void {
       //..Declaration des differents champs dans le formulaire (data binding)
@@ -92,6 +94,10 @@ export class ProductsComponent implements OnInit {
           this.errorMessage=err;
         }
       })
+    }
+
+    handleNewProduct(){
+      this.router.navigateByUrl("/admin/new-product")
     }
 
 }

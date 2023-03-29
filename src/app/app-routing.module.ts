@@ -5,6 +5,7 @@ import { CostumersComponent } from './costumers/costumers.component';
 import { AuthGuard } from './guard/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { NewProductComponent } from './new-product/new-product.component';
 import { ProductsComponent } from './products/products.component';
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
     {path:"costumers", component:CostumersComponent},
     {path:"products", component:ProductsComponent},
     {path:"home", component:HomeComponent},
+    {path:"new-product", component:NewProductComponent},
   ]},
 ];
 

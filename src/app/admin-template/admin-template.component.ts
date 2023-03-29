@@ -12,7 +12,6 @@ export class AdminTemplateComponent implements OnInit {
   constructor(public authService: AuthService, private router:Router){}
 
   ngOnInit(): void {
-
   }
 
   handleLogout(){
