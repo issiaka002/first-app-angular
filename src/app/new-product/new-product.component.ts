@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProductServiceService } from '../services/product-service.service';
 
 @Component({
   selector: 'app-new-product',
@@ -10,7 +11,7 @@ export class NewProductComponent implements OnInit {
 
   productFormGroup!:FormGroup;
 
-  constructor(private fb:FormBuilder){}
+  constructor(private fb:FormBuilder, private productService:ProductServiceService){}
 
   ngOnInit(): void {
     this.productFormGroup = this.fb.group({
@@ -23,9 +24,18 @@ export class NewProductComponent implements OnInit {
 
   handleAddProduct(){
     // console.log(this.productFormGroup.value);
+    let product =this.productFormGroup.value;
+    this.productService.addProduct(product).subscribe({
+      next: (data)=>{
+        alert("Product added successfully");
+        this.productFormGroup.reset();
+      },
+      error: err=> console.log(err)
 
+    })
   }
 
+  //..Methodes gerant les erreurs de saisir
   getErrorMessage(field:string, error:any):string{
     //..Pour trouver les attributs => {{productFormGroup.controls["price"].errors | json}}
     if(error['required']){

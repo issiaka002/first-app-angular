@@ -31,6 +31,7 @@ export class ProductServiceService {
     return of([...this.products]);
   }
 
+  //..Obtenir un page de produit pour la pagnination
   public getPageAllProduct(page:number, size:number): Observable<PageProduct>{
     let index = size*page;
     let totalPage=~~this.products.length/size;
@@ -65,6 +66,24 @@ export class ProductServiceService {
      return of(product);
   }
 
+  //..Ajouter un produit a la liste
+  addProduct(product: Product) : Observable<Product>{
+    product.id=UUID.UUID();
+    this.products.push(product);
+    return of(product);
+  }
 
+  //..Chercher un produits grace a son id
+  getProduct(id:string): Observable<Product>{
+    let prod=this.products.find(p=>p.id=id);
+    if(prod==undefined) return throwError(()=> new Error("Product not found"));
+    return of(prod);
+  }
+
+  //..Update product
+  updateProduct(product:Product): Observable<Product>{
+    this.products=this.products.map(p=>(p.id==product.id)?product:p);
+    return of(product);
+  }
 
 }

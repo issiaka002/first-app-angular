@@ -1,6 +1,6 @@
 <div class="container">
   <nav class="p-2 m-2 border border-info" *ngIf="authService.hasRole('ADMIN')">
-    <button class="btn btn-outline-success" (click)="handleNewProduct()">New Product</button>
+    <button class="btn btn-outline-success" (click)="handleNewProduct()"><i class="bi bi-file-plus"></i> Add</button>
   </nav>
   <div class="card">
     <div class="card-header">Product list</div>
@@ -40,9 +40,16 @@
                   <span *ngIf="p.promotion==false">on promo</span>
                 </button>
               </td>
-              <td *ngIf="authService.hasRole('ADMIN')"><button (click)="deleteProduct(p)" class="btn btn-danger">
-                <i class="bi bi-trash"></i>
-              </button></td>
+              <td *ngIf="authService.hasRole('ADMIN')">
+                <button (click)="deleteProduct(p)" class="btn btn-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+              <td *ngIf="authService.hasRole('ADMIN')">
+                <button (click)="handleEditProduct(p)" class="btn btn-success">
+                  <i class="bi bi-clipboard2-check-fill"></i>
+                </button>
+              </td>
           </tr>
         </tbody>
       </table>
